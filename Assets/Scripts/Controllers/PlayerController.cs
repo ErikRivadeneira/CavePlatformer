@@ -46,11 +46,11 @@ public class PlayerController : MonoBehaviour
     private float wallJumpingDirection;
     private float wallJumpingTime = 0.2f;
     private float wallJumpingCounter;
-    private float wallJumpingDuration = 0.4f;
+    private float wallJumpingDuration = 0.2f;
     //  Misc
     private Rigidbody2D rb;
     private Vector2 colliderSize;
-    private Vector2 wallJumpingPower = new Vector2(16f, 16f);
+    private Vector2 wallJumpingPower = new Vector2(8f, 16f);
 
 
     // Events
@@ -78,7 +78,11 @@ public class PlayerController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        if (!isWallJumping)
+        {
+            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        }
+        
     }
 
     /// <summary>
@@ -198,8 +202,6 @@ public class PlayerController : MonoBehaviour
     {
         // Player Jump
         PlayerJump();
-        // Player WallJump
-        WallJump();
         // Horizontal movement
         MovePlayer();
         // Player Crouch
@@ -210,6 +212,8 @@ public class PlayerController : MonoBehaviour
         cameraTransform.position = new Vector3(this.transform.position.x,this.transform.position.y + yCamOffset, this.transform.position.z + zCamOffset);
         // Player WallSlide
         WallSlide();
+        // Player WallJump
+        WallJump();
     }
 
     /// <summary>
