@@ -16,24 +16,34 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float zCamOffset;
     [SerializeField] private float yCamOffset;
     //  GameObjects
+    [SerializeField] private GameObject grabber;
+    [SerializeField] private GameObject stoneIndicator;
+    //  Transforms
     [SerializeField] private Transform groundPoint;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform throwPoint;
-    [SerializeField] private GameObject grabber;
-    [SerializeField] private GameObject stoneIndicator;
+    [SerializeField] private Transform wallCheck;
     //  UI
     //  Misc
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask wallLayer;
     //  Prefabs
     [SerializeField] private GameObject stonePrefab;
 
     // Player private variables
-    private Rigidbody2D rb;
+    //  Bools
     private bool isOnGround = true;
+    private bool isWallSliding;
     private bool doubleJump;
     private bool isCrouching = false;
-    private Vector2 colliderSize;
+    //  Ints
     private int stoneCounter = 0;
+    //  Floats
+    private float wallSlidingSpeed = 2f;
+
+    private Rigidbody2D rb;
+    private Vector2 colliderSize;
+    
 
     // Events
     public GrabberController onTriggerEnterEvent;
@@ -50,6 +60,11 @@ public class PlayerController : MonoBehaviour
         isOnGround = Physics2D.OverlapCircle(groundPoint.position, 0.2f, groundLayer);
 
         PlayerMovement();
+    }
+
+    bool isWalled()
+    {
+        return Physics2D.OverlapCircle(wallCheck.position, 0.2f, wallLayer);
     }
 
     void MovePlayer()
@@ -137,6 +152,9 @@ public class PlayerController : MonoBehaviour
 
         // Player Jump
         PlayerJump();
+
+        // Player WallSlide
+        WallSlide();
     }
 
     void PlayerJump()
@@ -158,6 +176,19 @@ public class PlayerController : MonoBehaviour
         if(Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.05f);
+        }
+    }
+
+    private void WallSlide()
+    {
+        if(isWalled() && !isOnGround && Input.GetAxisRaw("Horizontal")!= 0)
+        {
+            isWallSliding = true;
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+        }
+        else
+        {
+            isWallSliding = false;
         }
     }
 }
