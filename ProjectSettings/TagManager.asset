@@ -7,6 +7,8 @@ TagManager:
   - Stone
   - Enemy
   - Destructible
+  - BGM
+  - SFX
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     // Editor Variables
     //  Ints
     [SerializeField] private int maxStoneQuant;
+    [SerializeField] private int playeLifes;
     //  Floats
     [SerializeField] private float speed;
     [SerializeField] private float throwForce;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     // Player private variables
     private Rigidbody2D rb;
     private bool isOnGround = true;
+    private bool doubleJump;
     private bool isCrouching = false;
     private Vector2 colliderSize;
     private int stoneCounter = 0;
@@ -139,9 +141,23 @@ public class PlayerController : MonoBehaviour
 
     void PlayerJump()
     {
-        if (Input.GetButtonDown("Jump") && isOnGround)
+        if(isOnGround && !Input.GetButton("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            doubleJump = false;
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (isOnGround || doubleJump)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+
+                doubleJump = !doubleJump;
+            }
+        }
+        if(Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.05f);
         }
     }
 }
