@@ -38,11 +38,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerGrabOrShoot();
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            takeAnyDamage();
-        }
     }    
 
     /// <summary>
