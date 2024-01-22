@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class GameStateSingleton
@@ -14,8 +16,8 @@ public class GameStateSingleton
     private bool isGameOver = false;
     // Bool to check game paused
     private bool isGamePaused = false;
-
     // Current timer count (not yet implemented)
+    private float gameTime = 0;
 
     private GameStateSingleton() { }
 
@@ -24,9 +26,22 @@ public class GameStateSingleton
         get { return _instance; }
     }
 
+    public void InitializeGame()
+    {
+        currentLifes = 3;
+        isGameOver = false;
+        gameTime = 0;
+        isGamePaused = false;
+    }
+
     public int getCurrentLives()
     {
         return currentLifes;
+    }
+
+    public float getGameTime()
+    {
+        return gameTime;
     }
 
     public bool getIsGameOver()
@@ -48,5 +63,10 @@ public class GameStateSingleton
     {
         currentLifes = newLifeVal;
         isGameOver = currentLifes == 0 ? true : false;
+    }
+
+    public void setGameTime(float time)
+    {
+        gameTime = time;
     }
 }
