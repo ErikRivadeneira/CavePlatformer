@@ -1,37 +1,24 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    // Editor Variables
-    //  Ints
-    [SerializeField] private int maxStoneQuant;
-    [SerializeField] private int playerLifes;
+    // Editor Variables 
     //  Floats
     [SerializeField] private float speed;
-    [SerializeField] private float throwForce;
     [SerializeField] private float jumpForce;
     [SerializeField] private float zCamOffset;
     [SerializeField] private float yCamOffset;
-    //  GameObjects
-    [SerializeField] private GameObject grabber;
-    [SerializeField] private GameObject stoneIndicator;
     //  Transforms
     [SerializeField] private Transform groundPoint;
     [SerializeField] private Transform cameraTransform;
-    [SerializeField] private Transform throwPoint;
     [SerializeField] private Transform wallCheck;
-    //  UI
     //  Misc
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
-    //  Prefabs
-    [SerializeField] private GameObject stonePrefab;
 
-    // Player private variables
+    // Private Variables
     //  Bools
     private bool isOnGround = true;
     private bool isWallSliding;
@@ -39,8 +26,6 @@ public class PlayerController : MonoBehaviour
     private bool doubleJump;
     private bool isCrouching = false;
     private bool isFacingRight = true;
-    //  Ints
-    private int stoneCounter = 0;
     //  Floats
     private float horizontal;
     private float wallSlidingSpeed = 2f;
@@ -53,35 +38,21 @@ public class PlayerController : MonoBehaviour
     private Vector2 colliderSize;
     private Vector2 wallJumpingPower = new Vector2(8f, 16f);
 
-
-    // Events
-    public GrabberController onTriggerEnterEvent;
-
-    /// <summary>
-    /// Get rigidbody and collider size of player
-    /// </summary>
+    // Start is called before the first frame update
     void Start()
     {
-        playerLifes = GameStateSingleton.Instance.getCurrentLives();
         rb = this.GetComponent<Rigidbody2D>();
         colliderSize = this.GetComponent<CapsuleCollider2D>().size;
     }
 
-    /// <summary>
-    /// Check if player is on ground and move
-    /// </summary>
+    // Update is called once per frame
     void Update()
     {
         //Player Ground Check
         isOnGround = Physics2D.OverlapCircle(groundPoint.position, 0.2f, groundLayer);
         if (!GameStateSingleton.Instance.getIsGameOver() && !GameStateSingleton.Instance.getIsGamePaused())
         {
-            PlayerMovement();
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            takeAnyDamage();
+            MovePlayer();
         }
     }
 
@@ -91,7 +62,25 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
-        
+
+    }
+
+    /// <summary>
+    /// Player movement, crouching logic, if player presses S key, reduce collider size on Y axis to
+    /// half, else return collider to its original size.
+    /// </summary>
+    void Crouch()
+    {
+        isCrouching = Input.GetKey(KeyCode.S) ? true : false;
+
+        if (isCrouching)
+        {
+            this.GetComponent<CapsuleCollider2D>().size = new Vector2(colliderSize.x, colliderSize.y / 2);
+        }
+        else
+        {
+            this.GetComponent<CapsuleCollider2D>().size = colliderSize;
+        }
     }
 
     /// <summary>
@@ -118,121 +107,13 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Set horizontal value and flip based on input
-    /// </summary>
-    void MovePlayer()
-    {
-        horizontal = Input.GetAxisRaw("Horizontal");
-
-        //Flip character when moving, player can't flip while wall jumping 
-        if (!isWallJumping)
-        {
-            Flip();
-        }
-    }
-
-    /// <summary>
-    /// Add listener for grabber trigger on object enabled
-    /// </summary>
-    private void OnEnable()
-    {
-        onTriggerEnterEvent.onTriggerEnter2D.AddListener(OnGrabberEnter);
-    }
-
-    /// <summary>
-    /// Add Listener for grabber trigger on object disabled
-    /// </summary>
-    private void OnDisable()
-    {
-        onTriggerEnterEvent.onTriggerEnter2D.AddListener(OnGrabberEnter);
-    }
-
-    /// <summary>
-    /// Determine if object is inside grabber, if the object is a stone pick it up and destroy it
-    /// from the level.
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnGrabberEnter(Collider2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Stone") && stoneCounter < maxStoneQuant) 
-        {
-            stoneCounter++;
-            stoneIndicator.SetActive(true);
-            Destroy(collision.gameObject);
-        }
-    }
-
-    /// <summary>
-    /// Player movement, crouching logic, if player presses S key, reduce collider size on Y axis to
-    /// half, else return collider to its original size.
-    /// </summary>
-    void PlayerCrouch()
-    {
-        isCrouching = Input.GetKey(KeyCode.S) ? true : false;
-
-        if (isCrouching)
-        {
-            this.GetComponent<CapsuleCollider2D>().size = new Vector2(colliderSize.x, colliderSize.y / 2);
-        }
-        else
-        {
-            this.GetComponent<CapsuleCollider2D>().size = colliderSize;
-        }
-    }
-
-    /// <summary>
-    /// Player Interaction, check if player has a stone and shoot it if he has, else
-    /// set grabber active and inactive depending on press and release of the E button.
-    /// </summary>
-    void PlayerGrabOrShoot()
-    {
-        if(Input.GetKeyDown(KeyCode.E) && stoneCounter > 0) 
-        {
-            stoneCounter--;
-            GameObject thrownStone = Instantiate(stonePrefab, throwPoint.position, throwPoint.rotation);
-            thrownStone.GetComponent<Rigidbody2D>().AddForce(transform.right * throwForce, ForceMode2D.Impulse);
-            stoneIndicator.SetActive(false);
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            grabber.SetActive(true);
-        }
-        else if(Input.GetKeyUp(KeyCode.E)) 
-        {
-            grabber.SetActive(false);
-        }
-
-    }
-
-    /// <summary>
-    /// Function that controlls All player movement and camera follow.
-    /// </summary>
-    void PlayerMovement()
-    {
-        // Player Jump
-        PlayerJump();
-        // Horizontal movement
-        MovePlayer();
-        // Player Crouch
-        PlayerCrouch();
-        // Player Grab or Shoot
-        PlayerGrabOrShoot();
-        // Camera follow
-        cameraTransform.position = new Vector3(this.transform.position.x,this.transform.position.y + yCamOffset, this.transform.position.z + zCamOffset);
-        // Player WallSlide
-        WallSlide();
-        // Player WallJump
-        WallJump();
-    }
-
-    /// <summary>
     /// Player movement, checks if player is on ground and/or has double jump and lets player 
     /// jump acocordingly.
     /// </summary>
-    void PlayerJump()
+    void Jump()
     {
         // if player is on ground and doesn't press jump button set double jump to false
-        if(isOnGround && !Input.GetButton("Jump"))
+        if (isOnGround && !Input.GetButton("Jump"))
         {
             doubleJump = false;
         }
@@ -246,10 +127,43 @@ public class PlayerController : MonoBehaviour
             }
         }
         // If add 0.05f of force to player when releasing jump key, lets the player jump more or less depending on how much jump is pressed
-        if(Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.05f);
         }
+    }
+
+    /// <summary>
+    /// Set horizontal value and flip based on input
+    /// </summary>
+    void Move()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal");
+
+        //Flip character when moving, player can't flip while wall jumping 
+        if (!isWallJumping)
+        {
+            Flip();
+        }
+    }
+
+    /// <summary>
+    /// Function that controlls All player movement and camera follow.
+    /// </summary>
+    void MovePlayer()
+    {
+        // Player Jump
+        Jump();
+        // Horizontal movement
+        Move();
+        // Player Crouch
+        Crouch();
+        // Camera follow
+        cameraTransform.position = new Vector3(this.transform.position.x, this.transform.position.y + yCamOffset, this.transform.position.z + zCamOffset);
+        // Player WallSlide
+        WallSlide();
+        // Player WallJump
+        WallJump();
     }
 
     /// <summary>
@@ -258,13 +172,6 @@ public class PlayerController : MonoBehaviour
     private void StopWallJumping()
     {
         isWallJumping = false;
-    }
-
-    public void takeAnyDamage()
-    {
-        playerLifes--;
-        GameStateSingleton.Instance.setCurrentLifes(playerLifes);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     /// <summary>
@@ -286,13 +193,13 @@ public class PlayerController : MonoBehaviour
         }
 
         // If player presses jump then make player character jump, flip direction and set walljump counter to 0
-        if (Input.GetButtonDown("Jump") && wallJumpingCounter>0)
+        if (Input.GetButtonDown("Jump") && wallJumpingCounter > 0)
         {
             isWallJumping = true;
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             wallJumpingCounter = 0f;
             // flip player if player is not looking in the same direction of the jump
-            if(transform.localScale.x != wallJumpingDirection)
+            if (transform.localScale.x != wallJumpingDirection)
             {
                 isFacingRight = !isFacingRight;
                 Vector3 localScale = transform.localScale;
@@ -309,7 +216,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void WallSlide()
     {
-        if(isWalled() && !isOnGround && horizontal != 0)
+        if (isWalled() && !isOnGround && horizontal != 0)
         {
             isWallSliding = true;
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));

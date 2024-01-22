@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject stonePrefab;
     // Player private variables
     //  Ints
-    private int stoneCounter = 0;   
+    private int stoneCounter = 0;
     // Events
     public GrabberController onTriggerEnterEvent;
 
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerGrabOrShoot();
-    }    
+    }
 
     /// <summary>
     /// Add listener for grabber trigger on object enabled
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="collision"></param>
     private void OnGrabberEnter(Collider2D collision)
     {
-        if (collision.gameObject.tag.Equals("Stone") && stoneCounter < maxStoneQuant) 
+        if (collision.gameObject.tag.Equals("Stone") && stoneCounter < maxStoneQuant)
         {
             stoneCounter++;
             stoneIndicator.SetActive(true);
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void PlayerGrabOrShoot()
     {
-        if(Input.GetKeyDown(KeyCode.E) && stoneCounter > 0) 
+        if (Input.GetKeyDown(KeyCode.E) && stoneCounter > 0)
         {
             stoneCounter--;
             GameObject thrownStone = Instantiate(stonePrefab, throwPoint.position, throwPoint.rotation);
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
         {
             grabber.SetActive(true);
         }
-        else if(Input.GetKeyUp(KeyCode.E)) 
+        else if (Input.GetKeyUp(KeyCode.E))
         {
             grabber.SetActive(false);
         }
@@ -103,5 +103,5 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    
+
 }
