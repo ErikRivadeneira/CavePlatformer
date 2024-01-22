@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     // Editor Variables
     //  Ints
     [SerializeField] private int maxStoneQuant;
-    [SerializeField] private int playeLifes;
+    [SerializeField] private int playerLifes;
     //  Floats
     [SerializeField] private float speed;
     [SerializeField] private float throwForce;
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Start()
     {
+        playerLifes = GameStateSingleton.Instance.getCurrentLives();
         rb = this.GetComponent<Rigidbody2D>();
         colliderSize = this.GetComponent<CapsuleCollider2D>().size;
     }
@@ -72,8 +74,15 @@ public class PlayerController : MonoBehaviour
     {
         //Player Ground Check
         isOnGround = Physics2D.OverlapCircle(groundPoint.position, 0.2f, groundLayer);
+        if (!GameStateSingleton.Instance.getIsGameOver())
+        {
+            PlayerMovement();
+        }
 
-        PlayerMovement();
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            takeAnyDamage();
+        }
     }
 
     public void FixedUpdate()
@@ -249,6 +258,13 @@ public class PlayerController : MonoBehaviour
     private void StopWallJumping()
     {
         isWallJumping = false;
+    }
+
+    public void takeAnyDamage()
+    {
+        playerLifes--;
+        GameStateSingleton.Instance.setCurrentLifes(playerLifes);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     /// <summary>

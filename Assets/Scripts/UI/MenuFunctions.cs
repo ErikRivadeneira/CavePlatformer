@@ -46,6 +46,7 @@ public class MenuFunctions : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
+        GameStateSingleton.Instance.setCurrentLifes(3);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 
