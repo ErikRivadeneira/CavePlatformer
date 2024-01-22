@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Player Ground Check
         isOnGround = Physics2D.OverlapCircle(groundPoint.position, 0.2f, groundLayer);
-        if (!GameStateSingleton.Instance.getIsGameOver() || !GameStateSingleton.Instance.getIsGamePaused())
+        if (!GameStateSingleton.Instance.getIsGameOver() && !GameStateSingleton.Instance.getIsGamePaused())
         {
             MovePlayer();
         }
