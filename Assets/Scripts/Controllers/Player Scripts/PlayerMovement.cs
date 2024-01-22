@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform wallCheck;
     //  Misc
-    [SerializeField] private LayerMask groundLayer; 
+    [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
 
     // Private Variables
@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
             this.GetComponent<CapsuleCollider2D>().size = colliderSize;
         }
     }
-    
+
     /// <summary>
     /// Player movement, have player flip depending on bool and horizontal input axis
     /// </summary>
