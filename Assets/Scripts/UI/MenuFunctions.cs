@@ -34,23 +34,6 @@ public class MenuFunctions : MonoBehaviour
     }
 
     /// <summary>
-    /// Quits the game
-    /// </summary>
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    /// <summary>
-    /// Takes player to the first level
-    /// </summary>
-    public void StartGame()
-    {
-        GameStateSingleton.Instance.setCurrentLifes(3);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-    }
-
-    /// <summary>
     /// Opens option panel from pause or main menu
     /// </summary>
     public void OpenOptions() 
@@ -65,5 +48,22 @@ public class MenuFunctions : MonoBehaviour
         }
         optionsPanel.SetActive(true);
     }
-    
+
+    /// <summary>
+    /// Quits the game
+    /// </summary>
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    /// <summary>
+    /// Takes player to the first level
+    /// </summary>
+    public void StartGame()
+    {
+        GameStateSingleton.Instance.InitializeGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
 }
