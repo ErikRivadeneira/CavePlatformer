@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     //  Misc
     private Rigidbody2D rb;
     private Vector2 colliderSize;
-    private Vector2 wallJumpingPower = new Vector2(8f, 16f);
+    private Vector2 wallJumpingPower = new Vector2(3f, 16f);
 
     // Start is called before the first frame update
     void Start()
@@ -56,8 +56,7 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayer();
         }
-
-        animator.SetFloat("Horizontal", Mathf.Abs(horizontal));
+        animator.SetBool("enSuelo", isOnGround);        
     }
 
     public void FixedUpdate()
@@ -67,9 +66,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
 
-        animator.SetBool("enSuelo", isOnGround);
-        animator.SetBool("enMuro", isWallSliding);
-        animator.SetBool("Agachado", isCrouching);
+        
     }
 
     /// <summary>
@@ -88,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
         {
             this.GetComponent<CapsuleCollider2D>().size = colliderSize;
         }
+        animator.SetBool("Agachado", isCrouching);
     }
 
     /// <summary>
@@ -153,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-
+        animator.SetFloat("Horizontal", Mathf.Abs(horizontal));
         //Flip character when moving, player can't flip while wall jumping 
         if (!isWallJumping)
         {
@@ -240,5 +238,6 @@ public class PlayerMovement : MonoBehaviour
         {
             isWallSliding = false;
         }
+        animator.SetBool("enMuro", isWallSliding);
     }
 }
