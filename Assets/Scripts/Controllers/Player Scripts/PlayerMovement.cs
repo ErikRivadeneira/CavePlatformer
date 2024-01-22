@@ -43,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         colliderSize = this.GetComponent<CapsuleCollider2D>().size;
+
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -54,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayer();
         }
+
+        animator.SetFloat("Horizontal", Mathf.Abs(horizontal));
     }
 
     public void FixedUpdate()
@@ -63,6 +67,9 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
 
+        animator.SetBool("enSuelo", isOnGround);
+        animator.SetBool("enMuro", isWallSliding);
+        animator.SetBool("Agachado", isCrouching);
     }
 
     /// <summary>
@@ -97,6 +104,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Player Animation 
+    /// </summary>
+
+    [Header("Animacion")]    
+    private Animator animator;
+    
     /// <summary>
     /// Checks if player is over a wall or not
     /// </summary>
