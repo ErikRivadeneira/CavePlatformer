@@ -6314,6 +6314,7 @@ GameObject:
   - component: {fileID: 4637614830284488040}
   - component: {fileID: 2599617412377793547}
   - component: {fileID: 3521171907261929413}
+  - component: {fileID: 4637614830284488041}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6376,24 +6377,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxStoneQuant: 1
-  playeLifes: 3
-  speed: 10
+  playerLifes: 0
   throwForce: 10
-  jumpForce: 16
-  zCamOffset: -10
-  yCamOffset: 3
   grabber: {fileID: 9195878889844660878}
   stoneIndicator: {fileID: 8535390704651677320}
-  groundPoint: {fileID: 6021997892535454303}
-  cameraTransform: {fileID: 519420032}
   throwPoint: {fileID: 4328078254882120040}
-  wallCheck: {fileID: 1276964203}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 72
   stonePrefab: {fileID: 2028776197699747594, guid: 5b46a5b36733576428c211e6f484394f, type: 3}
   onTriggerEnterEvent: {fileID: 7226020705371255185}
 --- !u!4 &3624324964008855041
@@ -6532,6 +6520,31 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.0010963894}
   m_Size: {x: 1, y: 0.98}
   m_Direction: 0
+--- !u!114 &4637614830284488041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909696684680168715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5bdcd423a3c3ba4890458a045f1b23d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 8
+  jumpForce: 16
+  zCamOffset: -10
+  yCamOffset: 2
+  groundPoint: {fileID: 6021997892535454303}
+  cameraTransform: {fileID: 519420032}
+  wallCheck: {fileID: 1276964203}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 72
 --- !u!4 &6021997892535454303
 Transform:
   m_ObjectHideFlags: 0
