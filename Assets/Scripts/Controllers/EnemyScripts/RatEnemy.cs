@@ -10,6 +10,7 @@ public class RatEnemy : MonoBehaviour
     [SerializeField] private DetectionController onTriggerEnter2DEvent;
     [SerializeField] private float chargeSpeed;
     [SerializeField] private float chargeDuration;
+    [SerializeField] private Animator ratAnim;
 
     private int chargeDirection = 1;
     private bool facingRight = true;
@@ -39,9 +40,8 @@ public class RatEnemy : MonoBehaviour
             // if player position is within X axis bounds of enemy collider, enemy dies, else, enemy takes damage
             if (playerX < ratCollider.bounds.max.x && playerX > ratCollider.bounds.min.x) 
             {
-                collision.rigidbody.velocity = new Vector2(collision.rigidbody.velocity.x, 16f);
-                //Play death animation
-                Destroy(this.gameObject);
+                collision.rigidbody.velocity = new Vector2(collision.rigidbody.velocity.x, 8f);
+                Die();
             }
             else
             {
@@ -66,20 +66,27 @@ public class RatEnemy : MonoBehaviour
         onTriggerEnter2DEvent.onTriggerEnter2D.AddListener(PrepareCharge);
     }
 
+    private void Die()
+    {
+        rb.velocity = Vector2.zero;
+        ratAnim.SetBool("IsAlive", false);
+        isCharging = false;
+        Destroy(this.gameObject, 1f);
+    }
+
     private void PrepareCharge(Collider2D collision)
     {
         
         if (collision.gameObject.tag.Equals("Player"))
         {
             // add animation for prepare charge
-
+            ratAnim.SetBool("Charging", true);
             // get x from positions of player and rat;
             float currentX = this.transform.position.x;
             float playerX = collision.gameObject.transform.position.x;
             // flip direction of charge if necesary.
             Flip(currentX, playerX);
             Invoke(nameof(BeginCharge), 0.6f);
-            // set
             Invoke(nameof(StopCharge), chargeDuration);
         }
     }
@@ -111,5 +118,6 @@ public class RatEnemy : MonoBehaviour
     {
         // set animation back to idle
         isCharging = false;
+        ratAnim.SetBool("Charging", false);
     }
 }
