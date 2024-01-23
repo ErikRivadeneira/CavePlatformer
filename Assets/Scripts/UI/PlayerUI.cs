@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -17,8 +18,6 @@ public class PlayerUI : MonoBehaviour
     // Variables for stopwatch (Not implemented yet)
     float currentTime;
     [SerializeField] TextMeshProUGUI stopwatchText;
-    //GameOver Event Fire Counter
-    private int gOCounter = 0;
 
     void Start()
     {
@@ -33,10 +32,9 @@ public class PlayerUI : MonoBehaviour
         checkPause();
         UpdateStopwatch();
 
-        if (GameStateSingleton.Instance.getIsGameOver() && gOCounter == 0)
+        if (GameStateSingleton.Instance.getIsGameOver())
         {
             GameOver();
-            gOCounter++;
         }
     }
 
@@ -71,6 +69,7 @@ public class PlayerUI : MonoBehaviour
     void toCreditsScene()
     {
         // Send Player to Credits Scene;
+        SceneManager.LoadScene("Credits");
         Debug.Log("Sent to credits");
     }
 
