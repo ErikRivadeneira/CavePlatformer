@@ -888,8 +888,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: "DESARROLLO Y DISE\xD1O\n\nErik Rivadeneira\nCesar Lopez\n\nARTE \nPixelFantasyCaves
     pack by Szadi art\nFantasyKnight pack by  aamatniekss\nEnemy Galore I pack by
-    Admurin\n\nMUSICA\nPower Music Factory - Unknown\nTema B by\nTema C by\n\nEFECTOS
-    DE SONIDO\nLos efectos de sonido fueron recopilados de Pixabay\n\nABC\nDEF\nGHI\nJKL\n"
+    Admurin\nPixel Art Hearts pack by Thiago Zen\n\nMUSICA\nPower Music Factory -
+    Unknown\nMissing Persons - Jeremy Blake\nDead Wrong - Jeremy Blake\nFinal Girl
+    - Jeremy Blake\n\nEFECTOS DE SONIDO\nLos efectos de sonido fueron recopilados
+    de Pixabay"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
