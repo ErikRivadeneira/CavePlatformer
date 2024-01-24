@@ -1,14 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Credits : MonoBehaviour
 {
     [SerializeField] private CanvasGroup AnnouncementCanvas;
     [SerializeField] private GameObject creditsObject;
+    [SerializeField] private TextMeshProUGUI winAnnounceText;
+    [SerializeField] private Image bgImage;
+    [SerializeField] private Sprite winImage;
+    [SerializeField] private Sprite loseimage;
     private bool fadingIn = true;
     private bool startFade = false;
+
+    private void Start()
+    {
+        if (GameStateSingleton.Instance.getGameWon())
+        {
+            winAnnounceText.text = "Congratulations! You escaped the cave!";
+            bgImage.sprite = winImage;
+        }
+        else
+        {
+            winAnnounceText.text = "You have become nourishment for the cave...";
+            bgImage.sprite = loseimage;
+        }
+    }
 
     // Update is called once per frame
     void Update()

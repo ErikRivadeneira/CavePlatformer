@@ -18,6 +18,7 @@ public class GameStateSingleton
     private bool isGamePaused = false;
     // Current timer count (not yet implemented)
     private float gameTime = 0;
+    private bool gameWon = false;
 
     private GameStateSingleton() { }
 
@@ -32,6 +33,7 @@ public class GameStateSingleton
         isGameOver = false;
         gameTime = 0;
         isGamePaused = false;
+        gameWon = false;
     }
 
     public int getCurrentLives()
@@ -54,9 +56,19 @@ public class GameStateSingleton
         return isGamePaused;
     }
 
+    public bool getGameWon()
+    {
+        return gameWon;
+    }
+
     public void PauseGame()
     {
         isGamePaused = !isGamePaused;
+    }
+
+    public void WinGame()
+    {
+        gameWon = !gameWon;
     }
 
     public void setCurrentLifes(int newLifeVal)
