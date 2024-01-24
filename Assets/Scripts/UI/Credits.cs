@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,6 +11,7 @@ public class Credits : MonoBehaviour
     [SerializeField] private CanvasGroup AnnouncementCanvas;
     [SerializeField] private GameObject creditsObject;
     [SerializeField] private TextMeshProUGUI winAnnounceText;
+    [SerializeField] private TextMeshProUGUI runtimeText;
     [SerializeField] private Image bgImage;
     [SerializeField] private Sprite winImage;
     [SerializeField] private Sprite loseimage;
@@ -28,6 +30,10 @@ public class Credits : MonoBehaviour
             winAnnounceText.text = "You have become nourishment for the cave...";
             bgImage.sprite = loseimage;
         }
+
+        float currentTime = GameStateSingleton.Instance.getGameTime();
+        TimeSpan lastGameTime = TimeSpan.FromSeconds(currentTime);
+        runtimeText.text = lastGameTime.ToString(@"mm\:ss\:fff");
     }
 
     // Update is called once per frame
