@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             stoneCounter--;
             GameObject thrownStone = Instantiate(stonePrefab, throwPoint.position, throwPoint.rotation);
-            Vector3 playerDirection = new Vector3(this.transform.localScale.x/Mathf.Abs(this.transform.localScale.x), 0, 0);
+            Vector3 playerDirection = new Vector3(this.transform.localScale.x/Mathf.Abs(this.transform.localScale.x), 0.5f, 0);
             thrownStone.GetComponent<Rigidbody2D>().AddForce(playerDirection * throwForce, ForceMode2D.Impulse);
             stoneIndicator.SetActive(false);
         }
