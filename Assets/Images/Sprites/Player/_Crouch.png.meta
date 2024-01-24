@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 76d36b032f392324d8031594ce351a2b
+guid: 10d3d94f0056aa34c9289eb77b100a74
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,17 +106,56 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: _Jump_0
+      name: _Crouch_0
       rect:
         serializedVersion: 2
-        x: 45
+        x: 44
         y: 0
-        width: 23
-        height: 37
+        width: 27
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,50 +163,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 851289a152b4fca4da976e02ba0ec1eb
-      internalID: 258787375
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: _Jump_1
-      rect:
-        serializedVersion: 2
-        x: 165
-        y: 0
-        width: 23
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 593cadae54ac0c942bf6f3854fc8a11c
-      internalID: -21623158
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: _Jump_2
-      rect:
-        serializedVersion: 2
-        x: 285
-        y: 0
-        width: 23
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6e9e3285a60dffd47ba1723f1adee67b
-      internalID: -1842806714
+      spriteID: 409946b30abcfe94f8411daadf02992d
+      internalID: -1026396430
       vertices: []
       indices: 
       edges: []
@@ -183,9 +180,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      _Jump_0: 258787375
-      _Jump_1: -21623158
-      _Jump_2: -1842806714
+      _Crouch_0: -1026396430
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

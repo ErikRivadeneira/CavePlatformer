@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5bd81f0c29ca8a545967e839b5db1737
+guid: ba68e8bfa03d6b540a1e3fcfc7e742a4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,215 +106,212 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: _Run_0
+      name: _CrouchWalk_0
       rect:
         serializedVersion: 2
-        x: 43
-        y: 1
+        x: 44
+        y: 0
         width: 27
-        height: 36
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6109dc7c956169848a382c540e0e2954
-      internalID: 1532707447
+      spriteID: fbddfc6a889582945be449b5cc66caae
+      internalID: -2096243954
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _Run_1
+      name: _CrouchWalk_1
       rect:
         serializedVersion: 2
-        x: 165
+        x: 164
         y: 0
-        width: 24
-        height: 36
+        width: 27
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85415d96f780f63418e4334939bc4944
-      internalID: 1407479809
+      spriteID: 752352c837c44174595b2b6ebafb5a1f
+      internalID: -823836574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _Run_2
+      name: _CrouchWalk_2
       rect:
         serializedVersion: 2
-        x: 290
+        x: 283
         y: 0
-        width: 16
-        height: 36
+        width: 28
+        height: 27
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfddaf3c8a4c409408f97d1ca6639b47
-      internalID: -1606973883
+      spriteID: 3112785c6839a924ea7a3a57cede5d92
+      internalID: -1763984485
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _Run_3
+      name: _CrouchWalk_3
       rect:
         serializedVersion: 2
-        x: 407
-        y: 1
-        width: 17
-        height: 36
+        x: 404
+        y: 0
+        width: 27
+        height: 27
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80868dcbce440044788c8ad6f08e637a
-      internalID: -1607042280
+      spriteID: a9869b7c4c5b6094f93114e30f3dade1
+      internalID: -2079618563
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _Run_4
+      name: _CrouchWalk_4
       rect:
         serializedVersion: 2
         x: 524
-        y: 4
-        width: 24
-        height: 34
+        y: 0
+        width: 27
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93d8958f335d1b148b478581a9d3838d
-      internalID: -130170828
+      spriteID: 8d9422c1d2a440c46ac00bc6d353370c
+      internalID: 165241654
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _Run_5
+      name: _CrouchWalk_5
       rect:
         serializedVersion: 2
-        x: 641
-        y: 2
-        width: 28
-        height: 35
+        x: 644
+        y: 0
+        width: 27
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a610fc936c0f744188434694133d353
-      internalID: -1159826969
+      spriteID: 1b04f363a173c5c488f66129c3e65d4e
+      internalID: -1725014997
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _Run_6
+      name: _CrouchWalk_6
       rect:
         serializedVersion: 2
         x: 764
         y: 0
-        width: 24
-        height: 36
+        width: 27
+        height: 27
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6788b5b064406e64abd994c25fec614c
-      internalID: -567089521
+      spriteID: 07622a0db8ef9714596940efa465d00c
+      internalID: 1287428776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: _Run_7
+      name: _CrouchWalk_7
       rect:
         serializedVersion: 2
-        x: 887
+        x: 884
         y: 0
-        width: 16
-        height: 36
+        width: 27
+        height: 27
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6fba6ce23ea32a548ba1eaaabcc8c426
-      internalID: -796576122
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: _Run_8
-      rect:
-        serializedVersion: 2
-        x: 1007
-        y: 1
-        width: 16
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 95cbbbccbd68c3a4698b4fd253735d03
-      internalID: -702536283
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: _Run_9
-      rect:
-        serializedVersion: 2
-        x: 1123
-        y: 4
-        width: 25
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 59e7d4e9309080548adbe2f69bcb25c6
-      internalID: -1598862109
+      spriteID: 8fe368c6553876b499a21aed99c6f123
+      internalID: -555631319
       vertices: []
       indices: 
       edges: []
@@ -330,16 +327,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      _Run_0: 1532707447
-      _Run_1: 1407479809
-      _Run_2: -1606973883
-      _Run_3: -1607042280
-      _Run_4: -130170828
-      _Run_5: -1159826969
-      _Run_6: -567089521
-      _Run_7: -796576122
-      _Run_8: -702536283
-      _Run_9: -1598862109
+      _CrouchWalk_0: -2096243954
+      _CrouchWalk_1: -823836574
+      _CrouchWalk_2: -1763984485
+      _CrouchWalk_3: -2079618563
+      _CrouchWalk_4: 165241654
+      _CrouchWalk_5: -1725014997
+      _CrouchWalk_6: 1287428776
+      _CrouchWalk_7: -555631319
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
