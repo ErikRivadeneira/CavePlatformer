@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
@@ -11,20 +12,28 @@ public class RatEnemy : MonoBehaviour
     [SerializeField] private float chargeSpeed;
     [SerializeField] private float chargeDuration;
     [SerializeField] private Animator ratAnim;
+    [SerializeField] private AudioSource ratSource;
+    [SerializeField] private List<AudioClip> ratSounds;
 
     private int chargeDirection = 1;
     private bool facingRight = true;
     private bool isCharging = false;
+    private bool ratAlive = true;
     private Rigidbody2D rb;
 
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
+        if (PlayerPrefs.HasKey("SFXVol"))
+        {
+            float savedSfxVolume = PlayerPrefs.GetFloat("SFXVol");
+            ratSource.volume = savedSfxVolume;
+        }
     }
 
     private void Update()
     {
-        if(isCharging && !GameStateSingleton.Instance.getIsGameOver())
+        if(isCharging && ratAlive && !GameStateSingleton.Instance.getIsGameOver())
         {
             Charging();
         }
@@ -70,14 +79,17 @@ public class RatEnemy : MonoBehaviour
     {
         rb.velocity = Vector2.zero;
         ratAnim.SetBool("IsAlive", false);
-        isCharging = false;
+        ratAlive = false;
+        ratSource.PlayOneShot(ratSounds[0]);
         Destroy(this.gameObject, 1f);
     }
+
+
 
     private void PrepareCharge(Collider2D collision)
     {
         
-        if (collision.gameObject.tag.Equals("Player"))
+        if (collision.gameObject.tag.Equals("Player") && ratAlive)
         {
             // add animation for prepare charge
             ratAnim.SetBool("Charging", true);

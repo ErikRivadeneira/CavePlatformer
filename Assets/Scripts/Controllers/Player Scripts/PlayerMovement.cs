@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.iOS;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     //  Misc
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private AudioSource playerSource;
+    [SerializeField] private List<AudioClip> playerSounds = new List<AudioClip>();
 
     // Private Variables
     //  Bools
@@ -26,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private bool doubleJump;
     private bool isCrouching = false;
     private bool isFacingRight = true;
+    private bool canPlayJumpLandingSound = true;
     //  Floats
     private float horizontal;
     private float wallSlidingSpeed = 2f;
@@ -43,8 +47,12 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         colliderSize = this.GetComponent<CapsuleCollider2D>().size;
-
         animator = GetComponent<Animator>();
+        if (PlayerPrefs.HasKey("SFXVol"))
+        {
+            float savedSfxVolume = PlayerPrefs.GetFloat("SFXVol");
+            playerSource.volume = savedSfxVolume;
+        }
     }
 
     // Update is called once per frame
@@ -65,8 +73,19 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
+    }
 
-        
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (groundLayer == collision.gameObject.layer)
+        {
+            canPlayJumpLandingSound = true;
+            if (!playerSource.isPlaying && canPlayJumpLandingSound == true)
+            {
+                canPlayJumpLandingSound = false;
+                playerSource.PlayOneShot(playerSounds[2]);
+            }
+        }
     }
 
     /// <summary>
@@ -136,6 +155,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 doubleJump = !doubleJump;
+                playerSource.PlayOneShot(playerSounds[1]);
             }
         }
         // If add 0.05f of force to player when releasing jump key, lets the player jump more or less depending on how much jump is pressed
@@ -156,6 +176,10 @@ public class PlayerMovement : MonoBehaviour
         if (!isWallJumping)
         {
             Flip();
+        }
+        if((horizontal > 0 || horizontal < 0) && !playerSource.isPlaying && isOnGround)
+        {
+            playerSource.PlayOneShot(playerSounds[0]);
         }
     }
 
@@ -210,6 +234,7 @@ public class PlayerMovement : MonoBehaviour
             isWallJumping = true;
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             wallJumpingCounter = 0f;
+            playerSource.PlayOneShot(playerSounds[1]);
             // flip player if player is not looking in the same direction of the jump
             if (transform.localScale.x != wallJumpingDirection)
             {
