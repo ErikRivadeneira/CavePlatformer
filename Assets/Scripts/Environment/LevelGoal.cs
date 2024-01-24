@@ -9,6 +9,11 @@ public class LevelGoal : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Player"))
         {
+            if(SceneManager.GetActiveScene().buildIndex + 1 == 4)
+            {
+                GameStateSingleton.Instance.WinGame();
+            }
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
